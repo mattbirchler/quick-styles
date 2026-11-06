@@ -1,17 +1,25 @@
 (() => {
-  const STYLE_ID = "quick-styles-user-css";
   const globalKey = QuickStyles.GLOBAL_KEY;
   const siteKey = QuickStyles.siteKey(location.hostname);
   const state = {};
-  let styleEl = null;
 
-  // Keep our <style> as the last element in the document so it wins
-  // over the page's own stylesheets at equal specificity.
-  function place() {
-    const root = document.documentElement;
-    if (!styleEl || !root) return;
-    if (styleEl.parentNode !== root || root.lastElementChild !== styleEl) {
-      root.appendChild(styleEl);
+  // A constructed stylesheet instead of a <style> element: sites with a
+  // strict Content Security Policy (e.g. Mastodon's style-src nonce) block
+  // injected <style> tags in Safari, but CSP doesn't apply to adopted
+  // sheets. Adopted sheets also cascade after the page's own stylesheets,
+  // so ours wins at equal specificity.
+  const sheet = new CSSStyleSheet();
+  let currentCSS = "";
+
+  function attach() {
+    if (!document.adoptedStyleSheets.includes(sheet)) {
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
+    }
+  }
+
+  function detach() {
+    if (document.adoptedStyleSheets.includes(sheet)) {
+      document.adoptedStyleSheets = document.adoptedStyleSheets.filter((s) => s !== sheet);
     }
   }
 
@@ -21,16 +29,15 @@
     if (QuickStyles.isActive(state[siteKey])) parts.push(state[siteKey].css);
 
     if (parts.length === 0) {
-      styleEl?.remove();
+      detach();
       return;
     }
-    if (!styleEl) {
-      styleEl = document.createElement("style");
-      styleEl.id = STYLE_ID;
-    }
     const css = parts.join("\n\n");
-    if (styleEl.textContent !== css) styleEl.textContent = css;
-    place();
+    if (css !== currentCSS) {
+      sheet.replaceSync(css);
+      currentCSS = css;
+    }
+    attach();
   }
 
   browser.storage.local.get([globalKey, siteKey]).then((items) => {
@@ -50,11 +57,6 @@
     }
     if (touched) render();
   });
-
-  // The page's <head> and <body> get parsed after document_start, so move
-  // our style back to the end once they exist.
-  document.addEventListener("DOMContentLoaded", place, { once: true });
-  window.addEventListener("load", place, { once: true });
 
   // Lets the popup ask which site this tab is on.
   browser.runtime.onMessage.addListener((message) => {
