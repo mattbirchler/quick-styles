@@ -5,3 +5,5 @@ DerivedData/
 *.xcodeproj/project.xcworkspace/xcuserdata/
 fastlane/.env
 fastlane/report.xml
+vendor/
+*.xcodeproj/
