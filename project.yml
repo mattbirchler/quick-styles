@@ -1,0 +1,53 @@
+name: QuickStyles
+options:
+  bundleIdPrefix: birchtree
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    DEVELOPMENT_TEAM: ZPU7B69KH3
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "6.0"
+    ENABLE_HARDENED_RUNTIME: YES
+targets:
+  QuickStyles:
+    type: application
+    platform: macOS
+    sources:
+      - App
+    dependencies:
+      - target: QuickStylesExtension
+        embed: true
+        codeSign: true
+    settings:
+      base:
+        PRODUCT_NAME: Quick Styles
+        PRODUCT_BUNDLE_IDENTIFIER: birchtree.quick-styles
+        CODE_SIGN_ENTITLEMENTS: App/QuickStyles.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Quick Styles
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
+        INFOPLIST_KEY_NSHumanReadableCopyright: "MIT License. Free and open source."
+  QuickStylesExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: Extension
+        excludes:
+          - Resources
+      - path: Extension/Resources
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_NAME: Quick Styles Extension
+        PRODUCT_BUNDLE_IDENTIFIER: birchtree.quick-styles.Extension
+        CODE_SIGN_ENTITLEMENTS: Extension/QuickStylesExtension.entitlements
+        INFOPLIST_FILE: Extension/Info.plist
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Quick Styles
+        SKIP_INSTALL: YES
