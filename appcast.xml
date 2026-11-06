@@ -5,5 +5,18 @@
         <link>https://raw.githubusercontent.com/mattbirchler/quick-styles/main/appcast.xml</link>
         <description>Updates for Quick Styles</description>
         <language>en</language>
+        <item>
+            <title>Quick Styles 1.0</title>
+            <pubDate>Fri, 06 Nov 2026 21:13:01 GMT</pubDate>
+            <sparkle:version>2</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+<p>Quick Styles adds your own CSS to any website in Safari.</p>
+<ul><li>Click the Quick Styles button in the toolbar, type CSS, and the page updates as you type.</li><li>Styles are saved per site, and an <strong>All sites</strong> tab holds CSS that applies everywhere.</li><li>Switch a site&#x27;s styles off and on to compare with the original.</li><li><strong>Manage all styles</strong> lists every site you&#x27;ve styled, with export and import for backups.</li></ul>
+<p>It&#x27;s free and open source, with no accounts and no tracking.</p>
+            ]]></description>
+            <enclosure url="https://github.com/mattbirchler/quick-styles/releases/download/v1.0-2/QuickStyles-1.0-2.zip" type="application/octet-stream" sparkle:edSignature="828+iJla3L9ajfy9S/ViPqhxYwKWos7510QuGnTROLwBgJh6zUZYRANPCYM1jvtouU5Ljgo1biDazihgy2Y2BQ==" length="1363430"/>
+        </item>
     </channel>
 </rss>
