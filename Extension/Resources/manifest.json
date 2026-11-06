@@ -4,7 +4,10 @@
   "description": "Add your own CSS to any website.",
   "version": "1.0",
   "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
     "48": "icon-48.png",
+    "64": "icon-64.png",
     "96": "icon-96.png",
     "128": "icon-128.png",
     "256": "icon-256.png",
@@ -12,12 +15,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "toolbar-16.png",
-      "19": "toolbar-19.png",
-      "32": "toolbar-32.png",
-      "38": "toolbar-38.png"
-    },
+    "default_icon": "toolbar-icon.svg",
     "default_title": "Quick Styles"
   },
   "options_ui": {

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Extension/Resources/icon-128.png" width="96" height="96" alt="Quick Styles icon">
+  <img src="Extension/Resources/icon-512.png" width="128" height="128" alt="Quick Styles icon">
 </p>
 
 <h1 align="center">Quick Styles</h1>
