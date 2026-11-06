@@ -13,7 +13,7 @@
   <a href="https://github.com/mattbirchler/quick-styles/releases/latest"><strong>Download the latest release</strong></a>
 </p>
 
-![The Quick Styles popup in Safari, editing the CSS for mastodon.social](docs/images/popup.png)
+![The Quick Styles popup in Safari, editing the CSS for youtube.com](docs/images/popup.jpg)
 
 Click the paintbrush in Safari's toolbar, type some CSS, and the page changes as you type. Quick Styles remembers it, so the next time you visit that site your styles are already there.
 
@@ -21,13 +21,19 @@ Use it to fix a font that's hard to read, hide a distracting sidebar, or give a 
 
 ## See it in action
 
-Here's mastodon.social without and with [Tangerine UI](https://github.com/mattbirchler/TangerineUI-for-Mastodon), a full redesign of Mastodon's web app that's just a CSS file:
+Here's YouTube's Subscriptions page, before and after [one small stylesheet](examples/youtube-minimal.css).
 
-| Before | After |
-| --- | --- |
-| ![mastodon.social with its default look](docs/images/before.png) | ![mastodon.social restyled with Tangerine UI](docs/images/after.png) |
+**Before:** three huge thumbnails per row, a "Most relevant" shelf, Shorts, and a long sidebar.
 
-It works on sites with strict security settings, like Mastodon, that block the usual ways extensions add CSS.
+![YouTube Subscriptions with its default layout](docs/images/before.jpg)
+
+**After:** five smaller thumbnails per row, no Shorts, no "Most relevant" shelf, and a trimmed sidebar.
+
+![YouTube Subscriptions with the minimal style from examples/youtube-minimal.css](docs/images/after.jpg)
+
+To try it, open youtube.com, click Quick Styles, and paste in [`examples/youtube-minimal.css`](examples/youtube-minimal.css).
+
+Quick Styles also works on sites with strict security settings, like Mastodon, that block the usual ways extensions add CSS. [Tangerine UI](https://github.com/mattbirchler/TangerineUI-for-Mastodon), a full redesign of Mastodon's web app, runs great in it.
 
 ## Features
 
