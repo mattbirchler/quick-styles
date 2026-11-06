@@ -1,0 +1,31 @@
+body { width: auto; padding: 32px 24px; }
+main { max-width: 760px; margin: 0 auto; }
+.page-header { display: flex; align-items: center; justify-content: space-between; }
+h1 { margin: 0; font-size: 24px; }
+.actions { display: flex; gap: 8px; }
+.actions button {
+  font: inherit;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--field);
+  color: var(--fg);
+  cursor: pointer;
+}
+.intro { color: var(--muted); margin: 6px 0 16px; }
+input[type="search"] {
+  width: 100%;
+  padding: 7px 10px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--field);
+  color: var(--fg);
+  font: inherit;
+}
+.entry { margin-bottom: 20px; }
+.entry-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.entry-name { flex: 1; margin: 0; font-size: 14px; }
+.entry textarea { height: 160px; }
+.entry.off textarea { opacity: 0.55; }
+.empty { color: var(--muted); text-align: center; padding: 40px 0; }

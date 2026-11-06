@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quick Styles</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="options.css">
+  <script src="shared.js"></script>
+  <script src="options.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <h1>Quick Styles</h1>
+      <div class="actions">
+        <button id="export">Export</button>
+        <button id="import">Import</button>
+        <input id="import-file" type="file" accept="application/json,.json" hidden>
+      </div>
+    </header>
+    <p class="intro">Every website you've added CSS to. Changes save as you type.</p>
+    <input id="filter" type="search" placeholder="Filter sites">
+    <div id="list"></div>
+    <p id="empty" class="empty" hidden>No styles yet. Open a website, click Quick Styles in the toolbar, and add some CSS.</p>
+  </main>
+  <template id="entry-template">
+    <section class="entry">
+      <div class="entry-head">
+        <h2 class="entry-name"></h2>
+        <label class="switch" title="Turn these styles on or off">
+          <input class="entry-enabled" type="checkbox">
+          <span class="track"><span class="thumb"></span></span>
+          <span class="sr-only">Styles on</span>
+        </label>
+        <button class="link entry-delete">Delete</button>
+      </div>
+      <textarea class="entry-css" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+    </section>
+  </template>
+</body>
+</html>
