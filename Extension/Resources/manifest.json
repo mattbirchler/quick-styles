@@ -12,7 +12,12 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "toolbar-icon.svg",
+    "default_icon": {
+      "16": "toolbar-16.png",
+      "19": "toolbar-19.png",
+      "32": "toolbar-32.png",
+      "38": "toolbar-38.png"
+    },
     "default_title": "Quick Styles"
   },
   "options_ui": {

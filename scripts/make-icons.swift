@@ -45,4 +45,31 @@ try JSONSerialization.data(withJSONObject: contents, options: [.prettyPrinted, .
 for px in [48, 96, 128, 256, 512] {
     try render(px).write(to: URL(fileURLWithPath: "Extension/Resources/icon-\(px).png"))
 }
+
+// Safari toolbar icon: the same paintbrush, black on transparent. Safari
+// only uses the alpha channel and tints it to match the toolbar. The outline
+// variant matches the other outlined icons in Safari's toolbar.
+func renderToolbar(_ px: Int) -> Data {
+    let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: px, pixelsHigh: px, bitsPerSample: 8,
+                               samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
+                               colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
+    NSGraphicsContext.saveGraphicsState()
+    NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
+    let s = CGFloat(px)
+    let config = NSImage.SymbolConfiguration(pointSize: s, weight: .regular)
+        .applying(.init(paletteColors: [.black]))
+    if let symbol = NSImage(systemSymbolName: "paintbrush.pointed", accessibilityDescription: nil)?
+        .withSymbolConfiguration(config) {
+        // Scale the symbol to fit the canvas, keeping its proportions.
+        let fit = min(s / symbol.size.width, s / symbol.size.height)
+        let w = symbol.size.width * fit, h = symbol.size.height * fit
+        symbol.draw(in: NSRect(x: (s - w) / 2, y: (s - h) / 2, width: w, height: h))
+    }
+    NSGraphicsContext.restoreGraphicsState()
+    return rep.representation(using: .png, properties: [:])!
+}
+
+for px in [16, 19, 32, 38] {
+    try renderToolbar(px).write(to: URL(fileURLWithPath: "Extension/Resources/toolbar-\(px).png"))
+}
 print("Icons written")
