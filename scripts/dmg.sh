@@ -20,11 +20,19 @@ fi
 
 VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$APP/Contents/Info.plist")
 BUILD=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$APP/Contents/Info.plist")
-OUT="$(dirname "$APP")/../QuickStyles-$VERSION-$BUILD.dmg"
+# Next to the app's folder by default (where notarize.sh expects it), or in
+# OUT_DIR if set.
+OUT="${OUT_DIR:-$(dirname "$APP")/..}/QuickStyles-$VERSION-$BUILD.dmg"
 OUT=$(python3 -c "import os,sys; print(os.path.normpath(sys.argv[1]))" "$OUT")
 rm -f "$OUT"
 
-APP_PATH="$APP" "$VENV/bin/dmgbuild" -s scripts/dmg-settings.py "Quick Styles $VERSION" "$OUT" >&2
+# The window background (an arrow from the app to Applications) comes from
+# scripts/make-dmg-background.swift; combine its 1x and 2x PNGs into one
+# TIFF so Finder picks the sharp one on Retina screens.
+BACKGROUND=$(mktemp -d)/background.tiff
+tiffutil -cathidpicheck scripts/dmg/background.png scripts/dmg/background@2x.png -out "$BACKGROUND" 2>/dev/null
+
+APP_PATH="$APP" BACKGROUND_PATH="$BACKGROUND" "$VENV/bin/dmgbuild" -s scripts/dmg-settings.py "Quick Styles $VERSION" "$OUT" >&2
 
 if [[ "${SIGN:-0}" == 1 && -f fastlane/.env ]]; then
     set -a; source fastlane/.env; set +a

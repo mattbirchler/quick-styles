@@ -64,7 +64,7 @@ notarize:
 
 # Unsigned disk image of the local Release build, for a look at the window.
 dmg: install
-	@scripts/dmg.sh "/Applications/Quick Styles.app"
+	@OUT_DIR=$(DERIVED) scripts/dmg.sh "/Applications/Quick Styles.app"
 
 # Ship a new version through Sparkle and GitHub Releases:
 #   make publish NOTES=notes/1.1.md [VERSION=1.1]

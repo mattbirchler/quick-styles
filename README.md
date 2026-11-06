@@ -33,7 +33,7 @@ Here's YouTube's Subscriptions page, before and after [one small stylesheet](exa
 
 To try it, open youtube.com, click Quick Styles, and paste in [`examples/youtube-minimal.css`](examples/youtube-minimal.css).
 
-Quick Styles also works on sites with strict security settings, like Mastodon, that block the usual ways extensions add CSS. [Tangerine UI](https://github.com/mattbirchler/TangerineUI-for-Mastodon), a full redesign of Mastodon's web app, runs great in it.
+Quick Styles also works on sites with strict security settings, like Mastodon, that block the usual ways extensions add CSS. [Tangerine Neue](https://github.com/mattbirchler/TangerineUI-for-Mastodon), a full redesign of Mastodon's web app, runs great in it.
 
 ## Features
 

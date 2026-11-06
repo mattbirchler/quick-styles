@@ -1,5 +1,5 @@
 # dmgbuild settings for the Quick Styles disk image. Run through
-# scripts/dmg.sh, which sets APP_PATH.
+# scripts/dmg.sh, which sets APP_PATH and BACKGROUND_PATH.
 import os
 
 application = os.environ["APP_PATH"]
@@ -9,6 +9,7 @@ format = "UDZO"
 size = None
 files = [application]
 symlinks = {"Applications": "/Applications"}
+background = os.environ["BACKGROUND_PATH"]
 icon_locations = {appname: (140, 160), "Applications": (400, 160)}
 window_rect = ((200, 120), (540, 340))
 default_view = "icon-view"
