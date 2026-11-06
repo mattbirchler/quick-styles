@@ -4,6 +4,10 @@ options:
   deploymentTarget:
     macOS: "14.0"
   createIntermediateGroups: true
+packages:
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    exactVersion: 2.9.1
 settings:
   base:
     DEVELOPMENT_TEAM: ZPU7B69KH3
@@ -22,11 +26,16 @@ targets:
       - target: QuickStylesExtension
         embed: true
         codeSign: true
+      - package: Sparkle
     settings:
       base:
         PRODUCT_NAME: Quick Styles
         PRODUCT_BUNDLE_IDENTIFIER: birchtree.quick-styles
         CODE_SIGN_ENTITLEMENTS: App/QuickStyles.entitlements
+        # The app itself isn't sandboxed (it ships outside the App Store, and
+        # this keeps Sparkle simple). The Safari extension is sandboxed.
+        ENABLE_APP_SANDBOX: NO
+        INFOPLIST_FILE: App/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Quick Styles
@@ -39,14 +48,16 @@ targets:
       - path: Extension
         excludes:
           - Resources
+      # Safari wants manifest.json and friends at the top of the extension's
+      # Resources, so these are copied as individual files (no subfolders).
       - path: Extension/Resources
-        type: folder
         buildPhase: resources
     settings:
       base:
         PRODUCT_NAME: Quick Styles Extension
         PRODUCT_BUNDLE_IDENTIFIER: birchtree.quick-styles.Extension
         CODE_SIGN_ENTITLEMENTS: Extension/QuickStylesExtension.entitlements
+        ENABLE_APP_SANDBOX: YES
         INFOPLIST_FILE: Extension/Info.plist
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Quick Styles
